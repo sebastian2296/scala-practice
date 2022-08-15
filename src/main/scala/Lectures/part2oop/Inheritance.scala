@@ -2,7 +2,7 @@ package Lectures.part2oop
 
 import java.time.DayOfWeek
 
-object InheritanceAndTraits {
+object Inheritance {
   def main(args: Array[String]): Unit = {
 
     // single class inheritance
