@@ -28,7 +28,7 @@ abstract class MyList[+A] {
   def ++[B >: A](list: MyList[B]): MyList[B]
 }
 
-object empty extends MyList[Nothing] {
+case object empty extends MyList[Nothing] {
 
   def head: Nothing  = throw new NoSuchElementException
   def tail: MyList[Nothing] = throw new NoSuchElementException
@@ -42,7 +42,7 @@ object empty extends MyList[Nothing] {
 
 }
 
-class cons[+A](h: A, t: MyList[A]) extends MyList[A] {
+case class cons[+A](h: A, t: MyList[A]) extends MyList[A] {
   def head: A = h
   def tail: MyList[A] = t
   def isEmpty: Boolean = false
@@ -71,11 +71,13 @@ trait MyTransformer[-A, B] {
 
   object ListTest2 extends App {
     val listOfIntegers: MyList[Int] = new cons(1, new cons(2, new cons(3, empty)))
+    val cloneListOfIntegers: MyList[Int] = new cons(1, new cons(2, new cons(3, empty)))
     val listOfStrings: MyList[String] = new cons("Hello", new cons("Scala", empty))
 
     println(listOfIntegers.toString)
     println(listOfStrings.toString)
 
+    println(cloneListOfIntegers == listOfIntegers)
     /*
     1.  Create generic trait MyPredicate[-T] that has a method to test whether a value of T passes a condition
         method test(T) => Boolean
